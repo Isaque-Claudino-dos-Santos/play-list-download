@@ -19,6 +19,8 @@ export default class DowloadController {
         res.send(`<pre>${err.traceback} ${JSON.stringify(args)}</pre>`);
         throw err;
       }
+
+      res.send('Finished');
       console.log('finished');
     });
   }

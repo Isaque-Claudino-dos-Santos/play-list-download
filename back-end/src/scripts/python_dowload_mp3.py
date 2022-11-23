@@ -4,7 +4,7 @@ import os
 import sys
 import zipfile
 
-link = sys.argv[0]
+link = sys.argv[1]
 
 pathLocalStorage = './back-end/src/temp/music'
 list = Playlist(link)
@@ -23,7 +23,7 @@ for file in os.scandir(pathLocalStorage):
 
 
 # Compact muscis
-z = zipfile.ZipFile('./back-end/src/temp/music.zip', 'w', zipfile.ZIP_DEFLATED)
+z = zipfile.ZipFile('./src/temp/music.zip', 'w', zipfile.ZIP_DEFLATED)
 
 for file in os.scandir(pathLocalStorage):
     z.write(file)
