@@ -1,8 +1,25 @@
-import { Application, Request, Response } from 'express';
-import { DIR_VIEWS } from '../ts-env';
+import { Request, Response } from 'express';
+import { Options, PythonShell } from 'python-shell';
+import { DIR_SCRIPTS } from '../ts-env';
 
 export default class DowloadController {
-  public index(req: Request, res: Response): void {}
+  public listMusics(req: Request, res: Response): void {
+    const link: string = req.body.playlistLink;
+    const fileScript: string =
+      DIR_SCRIPTS + '/python_create_json_list_music.py';
+  }
 
-  public listMusics(req: Request, res: Response): void {}
+  public dowload(req: Request, res: Response): void {
+    const link: string = req.body.playlistLink;
+    const fileScript: string = DIR_SCRIPTS + '/python_dowload_mp3.py';
+    const args: Options = { args: [link] };
+
+    PythonShell.run(fileScript, args, function (err) {
+      if (err) {
+        res.send(`<pre>${err.traceback} ${JSON.stringify(args)}</pre>`);
+        throw err;
+      }
+      console.log('finished');
+    });
+  }
 }
